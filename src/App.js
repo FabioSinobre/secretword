@@ -1,3 +1,5 @@
+// components
+import StartScreen from './componet/StartScreen';
 
 import './App.css';
 
@@ -5,7 +7,7 @@ function App() {
   return (
     <>
     <div className='app'>
-    <h2>Palavra Secreta</h2>
+        <StartScreen/>
     </div>
     </>
   );
