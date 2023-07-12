@@ -2,7 +2,7 @@
 import { wordsList } from './Data/words';
 // CSS
 import './App.css';
-//React
+//React hockes
 import { useCallback } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -26,6 +26,11 @@ function App() {
   const [pickedCategory, setPickedCategory] = useState('')
   const [pickedWord, setPickedWord] = useState('')
   const [letters, setLetters] = useState([])
+
+  const [guessedLetters, setGuessedLetter] = useState([])
+  const [wrongLetters, setWrongLetter] = useState([])
+  const [guesses, setGuesses] = useState(3)
+  const [score, setScore] = useState(0)
 
   const pickedWordAndCategory = () =>{
     //pick a random category
@@ -52,6 +57,11 @@ function App() {
     console.log(word, category)
     console.log(wordLetters)
 
+    //fill startes
+    setPickedWord(word)
+    setPickedCategory(category)
+    setLetters(wordLetters)
+
     setGameStage(stages[1].name)
   }
 
@@ -69,7 +79,16 @@ function App() {
     <>
     <div className='app'>
         {gameStage === "start" && <StartScreen startGame={startGame}/>}
-        {gameStage === "game" && <Game verifyLetter={verifyLetter}/>}
+        {gameStage === "game" && <Game 
+          verifyLetter={verifyLetter} 
+          pickedWord={pickedWord} 
+          pickedCategory={pickedCategory} 
+          letters={letters}
+          guessedLetters={guessedLetters}
+          wrongLetters={wrongLetters}
+          guesses={guesses}
+          score={score}
+        />}
         {gameStage === "end" && <GameOver retry={retry}/>}
     </div>
     </>
